@@ -1,0 +1,148 @@
+<div class="container">
+	<section class="row">
+		<h1 class="subtitulo3"><strong>Haz tu cita</strong></h1>
+			<form [formGroup]="forma" (ngSubmit)="consultaTrabajador()" >
+			<app-loading *ngIf="loading" class="m-5"></app-loading>
+
+			<div [hidden]='loading'  class="animated fadeIn">
+
+				<!-- <div class='col-sm-6'>
+
+					 	<div  id='datetimepicker1' ></div>
+			 </div> -->
+
+				<div class="form-group row" [ngClass]="{'has-error': !forma.get('nss').valid}">
+						<div class="col-sm-3"></div>
+						<div class="col-sm-6">
+						<p class="parrafoSelect" style="text-align:center">
+							<span style="color:red">*</span>Ingresa tu Número de Seguridad Social:</p>
+
+								<input type="tel" autocomplete="off"
+								 class="keyboard form-control keyboard-numpad" id="numberNss"
+									formControlName="nss"
+								  placeholder="Número de Seguridad Social" style="width: 100%;">
+
+								   <div *ngIf="forma.controls['nss'].errors?.required"
+												class="help-block with-errors">
+											NSS es requerido
+									</div>
+									<div *ngIf="forma.controls['nss'].errors?.minlength"
+												class="help-block with-errors">
+											NSS es de 11 carateres
+									</div>
+									<div *ngIf="forma.controls['nss'].errors?.maxlength"
+												class="help-block with-errors">
+											NSS es de 11 carateres
+									</div>
+						</div>
+						<div class="col-sm-3"></div>
+				</div>
+				<div class="form-group row">
+					<div class="col-sm-3"></div>
+					<div class="col-sm-6">
+					<p class="parrafoSelect" style=" text-align:center">
+						<br>
+						<span style="color:red">*</span>Ingresa tu fecha de nacimiento:</p>
+					</div>
+					<div class="col-sm-3"></div>
+				</div>
+
+				<div class="form-group row" >
+					<div class="col-sm-3"></div>
+					<div class="col-sm-2" [ngClass]="{'has-error': !forma.get('dia').valid}" >
+						<div style=" text-align:center;" >
+								<label class="control-label" >Día</label>
+						</div>
+								<input type="tel" autocomplete="off"
+									class="keyboard form-control keyboard-numpad" id="numberDia"
+									 formControlName="dia" 	placeholder="dd" style="width: 100%;">
+									 <div *ngIf="forma.controls['dia'].errors?.required"
+												class="help-block with-errors">
+											El día es requerido
+									</div>
+									<div *ngIf="forma.controls['dia'].errors?.minlength"
+												class="help-block with-errors">
+											Día es de 2 carateres
+									</div>
+									<div *ngIf="forma.controls['dia'].errors?.maxlength"
+												class="help-block with-errors">
+											Día es de 2 carateres
+									</div>
+					</div>
+					<div class="col-sm-2" [ngClass]="{'has-error': !forma.get('mes').valid}" style=" text-align:center">
+								<div style=" text-align:center;" >
+									<label class="control-label" >Mes</label>
+								</div>
+								<select   class="form-control" formControlName="mes" style="width: 100%; color:#8c8c8c; "	>
+											 <option disabled  [ngValue]="null">Selecciona...</option>
+ 					             <option *ngFor="let mes of employee.meses"
+ 					               [value]="mes.codigo"> {{ mes.nombre }}</option>
+ 					      </select>
+											 <div *ngIf="forma.controls['mes'].errors?.required"
+														class="help-block with-errors">
+													El mes es requerido
+											</div>
+					</div>
+
+					<div class="col-sm-2" [ngClass]="{'has-error': !forma.get('anio').valid}">
+							<div style=" text-align:center;" >
+								<label class="control-label" >Año</label>
+							</div>
+
+						<input type="tel" autocomplete="off"
+		 											 class="keyboard form-control keyboard-numpad" id="numberAnio"
+		 												formControlName="anio"
+		 												placeholder="aaaa" style="width: 100%;">
+														<div *ngIf="forma.controls['anio'].errors?.required"
+ 																class="help-block with-errors">
+ 															El año es requerido
+ 													</div>
+ 													<div *ngIf="forma.controls['anio'].errors?.minlength"
+ 																class="help-block with-errors">
+ 															EL año es de 4 carateres
+ 													</div>
+													<div *ngIf="forma.controls['anio'].errors?.maxlength"
+																class="help-block with-errors">
+															EL año es de 4 carateres
+													</div>
+					</div>
+					<div class="col-sm-3"></div>
+				</div>
+
+				<div class="row" *ngIf="error" >
+						<div class="col-sm-3"></div>
+						<div class="col-sm-6" >
+								<div class="alert alert-danger" role="alert">
+								{{mensajeError}}
+								</div>
+						</div>
+						<div class="col-sm-3"></div>
+				</div>
+				<br><br>
+				<div class="row" >
+						<div class="col-sm-3"></div>
+						<div class="col-sm-6" >
+								<div style="color:red; text-align:right">
+									* Dato obligatorio
+								</div>
+						</div>
+						<div class="col-sm-3"></div>
+				</div>
+
+			</div>
+
+
+
+		<nav>
+				<div style="width: 90%; margin-left: 5%">
+					<button class="botonBlanco"  style="float: left"
+					 type="button" (click)="salir()">	Salir </button>
+					<button class="botonVerde" [disabled]="loading"
+					 style="float: right" type="submit" > Siguiente</button>
+
+				</div>
+			</nav>
+
+	</form>
+</section>
+</div>

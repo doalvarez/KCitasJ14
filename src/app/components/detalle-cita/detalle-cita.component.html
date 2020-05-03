@@ -1,0 +1,46 @@
+<section>
+            <app-loading *ngIf="loading" class="m-5"></app-loading>
+            <div style="width: 80%; margin: auto">
+
+                <div [hidden]='loading' class="animated fadeIn">
+                    <table width="100%" border="0" cellspacing="0" cellpadding="0">
+                        <tbody>
+                            <tr>
+                                <td width="56%">
+                                    <p>Cita para: {{appointment.serviceName}}</p>
+                                    <p>Programada para el: {{appointment.appointmentDay }} a las {{appointment.appointmentHour }}</p>
+                                    <p>Lugar y dirección: Cesi {{appointment.cesiName}}</p>
+                                    <p class="parrafo3">{{appointment.cesiLocation}}</p>
+                                </td>
+                                <td width="44%">
+                                    <p>{{appointment.idConfirmation}}</p>
+                                    <br>
+                                    <agm-map [zoom]="16" [latitude]="appointment.lat" [longitude]="appointment.lng">
+                                        <agm-marker [latitude]="appointment.lat" [longitude]="appointment.lng"></agm-marker>
+                                    </agm-map>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+               
+                    <div class="col-sm-12">
+                        <h2 class="text-center rojo" style="margin-bottom: 60px">Tu cita está confirmada</h2>
+                    </div>
+
+
+                    <h3 class="subtitulo6">Información y documentos para el día de tu cita</h3>
+                    <div class="" id="requisitos"> </div>
+
+                    <div id="flecha">
+                        <img src="assets/img/down02.gif" alt="down01" />
+                    </div>
+                </div>
+            </div>
+           
+            <iframe id="myIframeDetalle" style="display:none"></iframe>
+
+        </section>
+        <div style="width: 90%; margin-left: 5%; margin-bottom: 100px;">
+            <button class="botonBlanco" style="float: left" type="button" (click)="regresar()">Regresar</button>
+            <button class="botonVerde" style="float: right" type="submit" onClick="imprimirCitaDetalle()" (click)="loadingPrint()">Imprimir</button>
+        </div>

@@ -1,0 +1,91 @@
+<div class="container">
+
+	<section>
+	<form [formGroup]="forma"  >
+		<div class="row">
+				<div class="col-sm-12">
+						<h2><strong>Escoge el día y el horario de tu cita:</strong></h2>
+				</div>
+		</div>
+		<app-loading *ngIf="loading" class="m-5"></app-loading>
+
+		<div [hidden]='loading'>
+
+
+			<div style="padding-top: 30px;">	</div>
+
+				<div class="row">
+						<div class="col-md-3">
+								<div  id='datetimepicker'>	</div>
+								<div style="width: 90%; margin-left: 5%; padding-top: 130px;">
+									<button class="botonBlanco"  (click)="regresar()"
+									 type="button" > Regresar</button>
+								</div>
+						</div>
+						<div class="col-md-2">
+							<div class="circuloAzulCita"></div><p class="parrafo3">Día seleccionado</p>
+							<div class="circuloVerdeCita"></div><p class="parrafo3">Disponible</p>
+							<div class="circuloRojoCita"></div><p class="parrafo3">No disponible</p>
+
+							<div  [hidden]='!mesAnterior' sytle="padding-bottom: 10px;">
+								<button (click)="consultaMesAnterior()"
+								 type="button" name="button" class="btn btn-info">
+									Mes anterior
+								</button>
+							</div>
+							<br>
+							<div sytle="padding-top:15px;">
+								<button (click)="consultaSigMes()"
+								 type="button" name="button2" class="btn btn-info">
+									Siguiente mes
+								</button>
+							</div>
+
+						</div>
+						<div class="col-md-7" *ngIf='muestraHorarios'>
+							<div class="parent">
+							    <div class="child">
+							<p class="parrafo1">Horarios disponibles {{appointment.appointmentDay | date : 'dd-MM-yyyy'}}</p>
+							<p class="parrafo1">Elige tu hora para el CESI {{appointment.cesiName}} ubicado en:</p>
+							<p class="parrafo1"> {{appointment.cesiLocation}}</p>
+							<div class="menuHorario">
+								<ul>
+									<li  *ngFor="let horario of listHorarios">
+	 									 <button (click)="agendarCita(horario.startTime)" style="width:80px; height:35px;"
+	 										type="button" name="button2" class="btn btn-info">
+	 										 {{horario.startTime}}
+	 									 </button>
+ 								 	</li>
+								</ul>
+							</div>
+
+							</div>
+							</div>
+
+						</div>
+				</div>
+
+
+	</div>
+	<div class="row" *ngIf="error" >
+			<div class="col-sm-3"></div>
+			<div class="col-sm-6" >
+					<div class="alert alert-danger" role="alert">
+					{{mensajeError}}
+					</div>
+			</div>
+			<div class="col-sm-3"></div>
+	</div>
+
+	<br>
+	<br>
+
+
+
+
+
+</form>
+</section>
+
+
+</div>

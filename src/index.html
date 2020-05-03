@@ -1,0 +1,98 @@
+<!doctype html>
+<html lang="en">
+<head>
+
+  <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=11">
+    <meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <title>Cita Kioscos Infonavit</title>
+    <base href="./">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="icon" type="image/x-icon" href="favicon.ico">
+
+    <link rel="stylesheet" href="./assets/bootstrap/css/bootstrap.css">
+    <link rel="stylesheet" href="./assets/bootstrap/css/bootstrap-theme.css">
+    <!-- <link rel="stylesheet" href="./assets/4bootstrap4/bootstrap.css"> -->
+    <link rel="stylesheet" href="./assets/Calendar/css/Datetimepicker.css">
+    <link rel="stylesheet" href="./assets/libs/CSS/jqbtk.css">
+
+
+</head>
+<body>
+
+  <header>
+    <div class="fondoHeader">
+        <a id="idRef" onclick="homeK();"><img class="botonHome" src="assets/img/icono-home-blanco.png" width="69" height="69" alt="" onclick="homeK();" /></a>
+    </div>
+</header>
+
+  <app-root></app-root>
+
+  <script type="text/javascript" src="https://code.jquery.com/jquery-2.1.1.min.js"></script>
+  <script src="./assets/bootstrap/js/Bootstrap3.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.9.0/moment-with-locales.js"></script>
+  <script src="./assets/Calendar/js/bootstrap-datetimepickerTest.js"></script>
+  <script src="./assets/libs/jqbtk/jqbtk.js"></script>
+
+  <script type="text/javascript">
+    console.log('initKiosco');
+    var kioscoDefault = "KMonitoreo";
+    var idKiosco = null;
+
+    if (initSiteKiosk()) {
+        var xmlDoc = SiteKiosk.XML.LoadDocument('C:\\config.xml');
+        var root;
+        xmlDoc.async = false;
+        if (xmlDoc.parseError.errorCode != 0) {
+            var myErr = xmlDoc.parseError;
+            alert('Error ' + myErr.reason);
+        } else {
+            root = xmlDoc.documentElement;
+            idKiosco = root.getElementsByTagName("idKiosco").item(0).firstChild.nodeValue;
+        }
+    } else {
+        idKiosco = kioscoDefault;
+    }
+    console.log(idKiosco);
+    localStorage.setItem('startKiosco', idKiosco);
+
+
+    //Obtiene el objeto Sitekiosk si el kiosco esta sobre esa plataforma
+    function initSiteKiosk() {
+        try {
+            window.external.InitScriptInterface(document);
+        } catch (e) {
+            return false;
+        }
+        return true;
+    }
+
+    function homeK() {
+        console.log('Entro a HOME');
+        var rootUrl = ((!window.location.origin) ? window.location.protocol + "//" + window.location.hostname + (window.location.port ? ':' + window.location.port : '') : window.location.origin)
+        var rootAll = rootUrl + "/KC-GestionWeb/"
+        console.log(rootAll);
+        document.getElementById("idRef").href = rootAll;
+    }
+
+    function imprimirCita() {
+        var citaJson = localStorage.getItem('miCita');
+        var rootUrl = ((!window.location.origin) ? window.location.protocol + "//" + window.location.hostname + (window.location.port ? ':' + window.location.port : '') : window.location.origin)
+            // var rootUrl="http://localhost:9080";
+        var rootAll = rootUrl + "/KC-CitasWeb/printCita?trabajador=" + citaJson;
+        console.log(rootAll);
+        document.getElementById('myIframe').src = rootAll;
+    }
+
+    function imprimirCitaDetalle() {
+        var citaJson = localStorage.getItem('miCitaDetalle');
+        var rootUrl = ((!window.location.origin) ? window.location.protocol + "//" + window.location.hostname + (window.location.port ? ':' + window.location.port : '') : window.location.origin)
+            // var rootUrl="http://localhost:9080";
+        var rootAll = rootUrl + "/KC-CitasWeb/printCita?trabajador=" + citaJson;
+        console.log(rootAll);
+        document.getElementById('myIframeDetalle').src = rootAll;
+    }
+</script>
+
+</body>
+</html>

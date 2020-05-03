@@ -1,0 +1,53 @@
+<section>
+    <h1 class="subtitulo3">Has programado tu cita con éxito</h1>
+    <app-loading *ngIf="loading" class="m-5"></app-loading>
+    <div style="width: 80%; margin: auto">
+
+        <div [hidden]='loading' class="animated fadeIn">
+            <table width="100%" border="0" cellspacing="0" cellpadding="0">
+                <tbody>
+                    <tr>
+                        <td width="56%">
+                            <p>Cita para: {{appointment.serviceName}}</p>
+                            <p>Programada para el: {{appointment.appointmentDay | date : 'dd-MM-yyyy'}} a las {{appointment.appointmentHour | slice:0:5}}</p>
+                            <p>Lugar y dirección: Cesi {{appointment.cesiName}}</p>
+                            <p class="parrafo3">{{appointment.cesiLocation}}</p>
+                        </td>
+                        <td width="44%">
+                            <p>{{appointment.idConfirmation}}</p>
+                            <br>
+                            <agm-map [zoom]="16" [latitude]="appointment.lat" [longitude]="appointment.lng">
+                                <agm-marker [latitude]="appointment.lat" [longitude]="appointment.lng"></agm-marker>
+                            </agm-map>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+            <h3 class="subtitulo6">Información y documentos para el día de tu cita</h3>
+            <div class="" id="requerimientos">
+
+            </div>
+        </div>
+        <div id="flecha">
+            <img src="assets/img/down02.gif" alt="down01" />
+        </div>
+
+    </div>
+    <div class="menuCentrado">
+        <button class="botonBlanco"style="float: left"  type="button" (click)="salir()"> Salir</button>
+        <button class="botonVerde" style="margin-right: 55px;"   type="button" (click)="cancelar(appointment)"> Cancelar</button>
+        <button class="botonVerde" type="button" (click)="reprogramar(appointment)"> Reprogramar</button>
+        <button class="botonVerde" style="float: right;"  type="button" onClick="imprimirCita()" (click)="loadingPrint()"> Imprimir</button>
+
+    </div>
+    <iframe id="myIframe" style="display:none"></iframe>
+</section>
+<div class="row" *ngIf="error">
+    <div class="col-sm-3"></div>
+    <div class="col-sm-6">
+        <div class="alert alert-danger" role="alert">
+            {{mensajeError}}
+        </div>
+    </div>
+    <div class="col-sm-3"></div>
+</div>

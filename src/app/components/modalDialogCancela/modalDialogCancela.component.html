@@ -1,0 +1,17 @@
+<h1 mat-dialog-title></h1>
+<div mat-dialog-content style="border-radius: 50px;">
+  <div style="text-align: center;">
+    <img  src="assets/img/alertas-seguridad.jpg" width="69" height="69" alt=""  />
+    <div style="padding-top: 25px;"></div>
+    <p style="text-align: center;">¿Estás seguro que quieres cancelar tu cita?</p>
+
+  </div>
+</div>
+<div mat-dialog-actions>
+    <div style="padding-right: 125px;"></div>
+    <button class="botonBlancoAlert" style="text-align: left" type="button" (click)="exitClick()"> No</button>
+    <div style="padding-right: 50px;"></div>
+    <button class="botonVerdeAlert" style="text-align: right"  type="button" [mat-dialog-close]="" cdkFocusInitial (click)="cancelarClick()">  Sí</button>
+   
+
+</div>

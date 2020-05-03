@@ -1,0 +1,11 @@
+.bootstrap-datetimepicker-widget table td.active{
+  background-color:#00b9b1;
+}
+.bootstrap-datetimepicker-widget table td.active:hover {
+  background-color:#00b9b1;
+}
+
+
+.bootstrap-datetimepicker-widget table td.day {
+  background-color:#33FFC7;
+}

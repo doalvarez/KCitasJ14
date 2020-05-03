@@ -1,0 +1,41 @@
+<section>
+    <h1 class="subtitulo3">Confirma tu cita</h1>
+    <app-loading *ngIf="loading" class="m-5"></app-loading>
+
+    <div style="width: 80%; margin: auto">
+
+        <div *ngIf="!loading">
+
+            <table width="100%" border="0" cellspacing="0" cellpadding="0">
+                <tbody>
+                    <tr>
+                        <td width="56%">
+                            <p>Cita para: {{appointment.serviceName}}</p>
+                            <p>Programada para el: {{appointment.appointmentDay | date : 'dd-MM-yyyy'}} a las {{appointment.appointmentHour | slice:0:5}}</p>
+                            <p>Lugar y dirección: Cesi {{appointment.cesiName}}</p>
+                            <p class="parrafo3">{{appointment.cesiLocation}}</p>
+                        </td>
+                        <td width="44%">
+                            <agm-map [zoom]="16" [latitude]="appointment.lat" [longitude]="appointment.lng">
+                                <agm-marker [latitude]="appointment.lat" [longitude]="appointment.lng"></agm-marker>
+                            </agm-map>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+            <div class="leyendaContadorTimer" *ngIf="timerConfirmar">
+                Tienes <span id="timerSeg">60</span> segundos para confirmar tu cita
+            </div>
+            <div class="leyendaContadorTimer" *ngIf="!timerConfirmar">
+                Expiró tu tiempo para confirmar tu cita
+            </div>
+
+        </div>
+    </div>
+    <div class="menuCentrado">
+        <button class="botonBlanco" style="float: left" type="button" (click)="regresar()"> Regresar</button>
+        
+        <button class="botonVerde" [disabled]="!timerConfirmar" style="float: right" type="button" (click)="confirmarCita()"> Confirmar</button>
+
+    </div>
+</section>

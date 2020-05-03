@@ -1,0 +1,139 @@
+
+
+<section>
+	<h1 class="subtitulo3"><strong>Haz tu cita</strong></h1>
+
+	<app-loading *ngIf="loading" class="m-5"></app-loading>
+	<div style="width: 80%; margin: auto">
+	   <form [formGroup]="formaServicio" (ngSubmit)="consultaMesCupoDisp()" >
+		 <div *ngIf="!loading">
+
+			 <div class="row" *ngIf="!appointment.isChangeAppointment">
+				 	<div class="col-sm-3"> </div>
+				  <div class="col-sm-6" [ngClass]="{'has-error': !formaServicio.get('servicio').valid}">
+							<div style=" text-align:center;" >
+
+									<label class="control-label textoInput1" >
+										<span style="color:red">*</span>Servicio para el cual deseas la cita:
+									</label>
+							</div>
+
+												 <select  (change)="actionGetEstados($event)" class="form-control"
+												 formControlName="servicio"style="width: 100%; color:#8c8c8c;">
+														<option disabled  [ngValue]="null">Selecciona...</option>
+														<option *ngFor="let srv of appointment.services"
+															[value]="srv.servicioId"> {{ srv.descServicio }}</option>
+												</select>
+													<div *ngIf="formaServicio.controls['servicio'].errors?.required"
+																 class="help-block with-errors">
+															 El servicio es requerido
+													 </div>
+					 </div>
+					 	<div class="col-sm-3"> </div>
+				</div>
+				<div class="row" *ngIf="appointment.isChangeAppointment">
+					<div class="col-sm-3"> </div>
+					<div class="col-sm-6">
+						<div style=" text-align:center;" >
+							<label class="control-label textoInput1" >
+								<span style="color:red">*</span>Servicio para el cual deseas la cita:
+							</label>
+						</div>
+						<input  class="form-control" style="width: 100%;"  value="{{appointment.serviceName}}" [readonly]="true">
+
+					</div>
+					<div class="col-sm-3"> </div>
+				</div>
+		<div class="row">
+					<br><br>
+		</div>
+				 <div class="row">
+					 <div class="col-sm-3"></div>
+					 <div class="col-sm-6" [ngClass]="{'has-error': !formaServicio.get('estado').valid}">
+						 	<div style=" text-align:center;" >
+
+										 <label class="control-label textoInput1" >
+											  <span style="color:red">*</span>Elige un estado:
+										</label>
+							</div>
+													 <select  (change)="actionGetCesis($event)"
+													   		class="form-control" formControlName="estado"  style="width: 100%; color:#8c8c8c;">
+			 														<option disabled  [ngValue]="null">Selecciona...</option>
+															<option *ngFor="let estado of appointment.states"
+																[value]="estado.regionCode"> {{ estado.regionDes }}</option>
+													</select>
+															<div *ngIf="formaServicio.controls['estado'].errors?.required"
+																	 class="help-block with-errors">
+																 El estado es requerido
+														 </div>
+						 </div>
+						 <div class="col-sm-3"></div>
+					</div>
+<div class="row">
+	<br><br>
+</div>
+ <div class="row">
+	 	 <div class="col-sm-3"></div>
+	  <div class="col-sm-6"  [ngClass]="{'has-error': !formaServicio.get('cesi').valid}">
+			<div style=" text-align:center;" >
+
+						 <label class="control-label textoInput1" >
+							 <span style="color:red">*</span>Centro de servicio
+						 </label>
+			</div>
+									 <select  (change)="actionSaveCesis($event)"
+									  class="form-control" formControlName="cesi" style="width: 100%; color:#8c8c8c;">
+											 <option disabled  [ngValue]="null">Selecciona...</option>
+											<option *ngFor="let cesi of appointment.cesis"
+												[value]="cesi.organizationCode"> {{ cesi.organizationDescription }}</option>
+									</select>
+											<div *ngIf="formaServicio.controls['cesi'].errors?.required"
+													 class="help-block with-errors">
+												 El centro de servicio es requerido
+										 </div>
+		  </div>
+		  <div class="col-sm-3" ></div>
+		</div>
+		<br><br>
+		<div class="row" >
+				<div class="col-sm-3"></div>
+				<div class="col-sm-6" >
+						<div style="color:red; text-align:right">
+							* Dato obligatorio
+						</div>
+				</div>
+				<div class="col-sm-3"></div>
+		</div>
+</div>
+
+<div class="row" *ngIf="error" >
+		<div class="col-sm-3"></div>
+		<div class="col-sm-6" >
+				<div class="alert alert-danger" role="alert">
+				{{mensajeError}}
+				</div>
+		</div>
+		<div class="col-sm-3"></div>
+</div>
+<div class="row" *ngIf="info" style="padding-top: 20px;">
+		<div class="col-sm-3"></div>
+		<div class="col-sm-6" >
+				<div class="alert alert-info" role="info"  style=" text-align:center;">
+				{{msjInfo}}
+				</div>
+		</div>
+		<div class="col-sm-3"></div>
+</div>
+		<nav>
+				<div style="width: 90%; margin-left: 5%">
+					<button class="botonBlanco"  style="float: left"
+					 type="button" (click)="salir()"> Salir</button>
+					<button class="botonVerde" [disabled]="loading || error"
+					 style="float: right" type="submit" > Siguiente</button>
+
+				</div>
+			</nav>
+
+	</form>
+		</div>
+</section>

@@ -1,0 +1,104 @@
+<div class="container">
+<section class="row">
+
+	<h1 class="subtitulo3"><strong>Haz tu cita</strong></h1>
+	<app-loading *ngIf="loading" class="m-5"></app-loading>
+
+	  <form [formGroup]="forma" (ngSubmit)="consultaServicios()" >
+		<!-- <div *ngIf="!loading"> -->
+		<div [hidden]='loading' class="animated fadeIn">
+
+			<div class="form-group row"  [ngClass]="{'has-error': !forma.get('celular').valid}">
+					<div class="col-sm-3"></div>
+					<div class="col-sm-6">
+							<div style=" text-align:center;" >
+								<label for=""><span style="color:red">*</span>Teléfono móvil:</label>
+							</div>
+
+							<input type="tel" autocomplete="off"
+							 class="keyboard form-control keyboard-numpad" id="numberCel"
+								formControlName="celular"
+								placeholder="10 dígitos" style="width: 100%;">
+
+							<div *ngIf="forma.controls['celular'].errors?.required"
+									 class="help-block with-errors">
+								 Teléfono móvil es requerido
+						 </div>
+						 <div *ngIf="forma.controls['celular'].errors?.minlength"
+									 class="help-block with-errors">
+								 Teléfono móvil debe ser de 10 carateres
+						 </div>
+						 <div *ngIf="forma.controls['celular'].errors?.maxlength"
+									class="help-block with-errors">
+								Teléfono móvil debe ser de 10 carateres
+						</div>
+					</div>
+					<div class="col-sm-3"></div>
+				</div>
+				<br>
+				<div class="form-group row"  [ngClass]="{'has-error': !forma.get('correo').valid}">
+					<div class="col-sm-3"></div>
+					<div class="col-sm-6">
+							<div style=" text-align:center;" >
+									<label for=""><span style="color:red">*</span>Correo electrónico:</label>
+								</div>
+						<input type="text" style="width: 100%;"  class="keyboard form-control"
+						 id="CorreoCustom" formControlName="correo"
+							placeholder="nombre@correo.com" autocomplete="off">
+
+							 <div *ngIf="forma.controls['correo'].errors?.required"
+										class="help-block with-errors">
+									Correo electrónico es requerido
+							</div>
+							<div *ngIf="forma.controls['correo'].errors?.pattern"
+										class="help-block with-errors">
+								 Formato de correo electrónico invalido
+							</div>
+					</div>
+					<div class="col-sm-3"></div>
+				</div>
+				<br>
+				<div class="form-group row">
+					<div class="col-sm-3"></div>
+					<div class="col-sm-3">
+							<div style=" text-align:left; margin-left: 30px;" >
+								<label for="">Lada:</label>
+							</div>
+						<input type="tel" autocomplete="off"
+							class="keyboard form-control keyboard-numpad" id="numberLada"
+							formControlName="lada"
+							placeholder="Lada" style="width:100px;">
+						</div>
+						<div class="col-sm-3">
+							<div style=" text-align:center;" >
+								<label for="">Número de casa:</label>
+							</div>
+							<input type="tel" autocomplete="off"
+								class="keyboard form-control keyboard-numpad" id="numberTelLocal"
+								formControlName="telefono"
+								placeholder="Teléfono de casa"  style="width: 100%;">
+						</div>
+						<div class="col-sm-3"></div>
+					</div>
+					<br><br>
+					<div class="row" >
+							<div class="col-sm-3"></div>
+							<div class="col-sm-6" >
+									<div style="color:red; text-align:right">
+										* Dato obligatorio
+									</div>
+							</div>
+							<div class="col-sm-3"></div>
+					</div>
+</div>
+<nav>
+	<div style="width: 90%; margin-left: 5%">
+		<button class="botonBlanco"  style="float: left"
+		 type="button" (click)="regresar()"> Regresar</button>
+		<button class="botonVerde" [disabled]="loading"
+		 style="float: right" type="submit" > Siguiente</button>
+	</div>
+</nav>
+</form>
+</section>
+</div>

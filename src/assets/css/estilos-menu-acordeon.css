@@ -1,0 +1,54 @@
+@charset "utf-8";
+/* CSS Document */
+
+/****** Estilos Menú tipo acordeón ******/
+.accordeon {
+    background-color:#F8F8F8;
+    cursor: pointer;
+    padding: 24px 24px 24px 76px;
+    width: 500px;
+    border: none;
+    text-align: left;
+    outline: none;
+    font-size: 1.5em;
+    transition: 0.4s;
+}
+
+/* .active, .accordeon:hover {
+    background-color:#F2F2F2;
+}
+
+.accordeon:after {
+    content:url(../../assets/img/flecha-verde-down.png);
+    float: right;
+    margin-left: 5px;
+}
+
+.active:after {
+    content:url(../../assets/img/flecha-verde-up.png);
+} */
+
+/* .panel {
+    padding: 0px;
+    background-color: #00b9b1;
+    max-height: 0;
+    overflow: hidden;
+    transition: max-height 0.2s ease-out;
+	width: 500px;
+	text-align: center;
+}
+
+.panel ul li{
+	list-style: none;
+	padding: 1px;
+}
+
+.panel ul li a{
+	text-decoration: none;
+	font-size: 1.2em;
+	color: #00b9b1;
+	background-color: #FFFFFF;
+	padding: 20px;
+	width: 458px;
+	display: block;
+} */
